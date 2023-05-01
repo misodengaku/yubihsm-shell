@@ -1066,6 +1066,13 @@ static CK_RV get_attribute_opaque(CK_ATTRIBUTE_TYPE type,
       get_label_attribute(object, false, meta_object, value, length);
       break;
 
+    case CKA_UNIQUE_ID:
+      sprintf(value, "%02x%02x%04x",
+              meta_object->target_sequence, meta_object->target_type,
+              meta_object->target_id);
+      *length = strlen(value);
+      break;
+
     case CKA_ID:
       get_id_attribute(object, false, meta_object, value, length);
       break;
